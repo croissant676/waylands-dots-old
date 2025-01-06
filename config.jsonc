@@ -1,0 +1,117 @@
+{
+    "height": 30,
+    "spacing": 4,
+    "margin": 10,
+    "modules-left": [
+        "custom/pomodoro",
+        "pulseaudio",
+        "custom/media"
+    ],
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    "modules-right": [
+        "hyprland/window",
+        "network",
+        "custom/clock"
+    ],
+    "hyprland/workspaces": {
+        "format": "{id} {windows}",
+        "window-rewrite": {
+            "title<.*youtube.*>": "\uDB81\uDDC3",
+            "class<firefox>": "\uE658",
+            "class<kitty>": "\uF489",
+            "code": "\uF1BC",
+            "idea": "\uEAC4",
+            "spotify": "\uF1BC",
+            "class<vesktop>": "\uDB81\uDE6F",
+            "class<krita>": "\uF1FC",
+            "class<prism>": "mc",
+            "class<nemo>": "\uF413",
+            "dolphin": "\uDB86\uDCB4",
+            "obsidian": "\uE647"
+        }
+    },
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 50,
+        "rewrite": {
+            "(.*) — Mozilla Firefox": "\uE658 $1",
+            "Mozilla Firefox": "new tab",
+            "(.*) - Google Search.*": "\uE644 $1",
+            "(.*) - Stack Overflow.*": "\uF16C $1",
+            "(.*) - Github.*": "\uE65B $1",
+            "(.*) Stack Exchange.*": "\uF18D $1",
+            "(.*): r/(.*)": "\uF1A1  r/$2",
+            " ": "\uEAC4 idea",
+            "Spotify Free": "\uF001 ",
+            "~": "\uF489 kitty",
+            "Discord": "\uDB81\uDE6F discord",
+            "code": "\uF1BC",
+            ".* Dolphin": "\uDB86\uDCB4 dolphin",
+            ".* Nemo": "\uF413 files",
+            "(.*) - Obsidian.*": "\uE647 $1"
+        },
+        "separate-outputs": true
+    },
+    "network": {
+        "format-wifi": "\uF1EB  {signalStrength}%",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "network: {essid}\naddress: {gwaddr}\nip: {ipaddr}/{cidr}\n\nactions\n:click to open wifi mgr ctl",
+        "format-disconnected": "\uDB81\uDDAA :(",
+        "on-click": "kitty iwctl"
+    },
+    "pulseaudio": {
+        "format": "\uE638 {volume}%",
+        "tooltip-format": "actions\n:click to open volume control\n:scroll to adjust the volume",
+        "format-icons": {
+            "default": [
+                "\uEE00\uEE01\uEE01\uEE01\uEE01\uEE01\uEE02",
+                "\uEE03\uEE01\uEE01\uEE01\uEE01\uEE01\uEE02",
+                "\uEE03\uEE04\uEE01\uEE01\uEE01\uEE01\uEE02",
+                "\uEE03\uEE04\uEE04\uEE01\uEE01\uEE01\uEE02",
+                "\uEE03\uEE04\uEE04\uEE04\uEE01\uEE01\uEE02",
+                "\uEE03\uEE04\uEE04\uEE04\uEE04\uEE01\uEE02",
+                "\uEE03\uEE04\uEE04\uEE04\uEE04\uEE04\uEE02",
+                "\uEE03\uEE04\uEE04\uEE04\uEE04\uEE04\uEE05"
+            ]
+        },
+        "on-click": "pavucontrol",
+        "escape": false
+    },
+    "custom/clock": {
+        "exec": "~/.config/waybar/clock-script.sh",
+        "interval": 1,
+        "return-type": "json",
+        "on-click": "~/.config/waybar/obsidian-launch-daily.sh"
+    },
+    "custom/pomodoro": {
+        "exec": "curl http://localhost:9081/poll",
+        "interval": 1,
+        "return-type": "json",
+        "on-click": "curl http://localhost:9081/lc",
+        "on-click-right": "curl http://localhost:9081/stop",
+        "on-click-middle" : "curl http://localhost:9081/reload",
+        "on-scroll-up": "curl http://localhost:9081/next",
+        "on-scroll-down": "curl http://localhost:9081/sc_down"
+    },
+    "custom/resources": {
+
+    },
+    "custom/menu": {
+        "format": "\uF303 ",
+        "tooltip-format": "",
+        "on-click": "wofi --show=drun"
+    },
+
+    "custom/media": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "python3 ~/.config/waybar/media.py 2>/dev/null",
+        "on-click": "playerctl --player=spotify,%any play-pause",
+        "on-scroll-up": "playerctl --player=spotify,%any next",
+        "on-scroll-down": "playerctl --player=spotify,%any previous"
+    }
+}
+
+
