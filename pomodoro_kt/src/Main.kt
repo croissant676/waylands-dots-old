@@ -55,10 +55,12 @@ fun endSession() {
             "next up: ${nextSession.desc} (${writeDuration(nextSession.duration)})"
         )
     )
+    runCatching{
     val clip = AudioSystem.getClip()
     val inputStream: AudioInputStream = AudioSystem.getAudioInputStream(File("/home/kason/Downloads/mixkit-correct-answer-tone-2870.wav"))
     clip.open(inputStream)
     clip.start()
+    }
 }
 
 fun start() {
